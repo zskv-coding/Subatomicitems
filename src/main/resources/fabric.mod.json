@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "subatomicitems",
+  "version": "${version}",
+  "name": "SubatomicItems",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/subatomicitems/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.zskv.subatomicitems.client.SubatomicitemsDataGenerator"
+    ],
+    "client": [
+      "net.zskv.subatomicitems.client.SubatomicitemsClient"
+    ],
+    "main": [
+      "net.zskv.subatomicitems.Subatomicitems"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "subatomicitems.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
