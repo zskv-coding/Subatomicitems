@@ -3,6 +3,7 @@
   "package": "net.zskv.subatomicitems.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "LivingEntityRendererMixin",
     "PlayerEntityModelMixin"
   ],
   "injectors": {

@@ -6,6 +6,7 @@ import net.minecraft.component.type.LoreComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -51,6 +52,13 @@ public class InvisibleArmor {
             enchant(r, boots, Enchantments.SOUL_SPEED, 3);
             return boots;
         });
+    }
+
+    public static boolean wearingAny(LivingEntity entity) {
+        return ExploitedItems.is(entity.getEquippedStack(EquipmentSlot.HEAD), HELMET)
+                || ExploitedItems.is(entity.getEquippedStack(EquipmentSlot.CHEST), CHESTPLATE)
+                || ExploitedItems.is(entity.getEquippedStack(EquipmentSlot.LEGS), LEGGINGS)
+                || ExploitedItems.is(entity.getEquippedStack(EquipmentSlot.FEET), BOOTS);
     }
 
     private static ItemStack makeArmor(RegistryWrapper.WrapperLookup r, Item item, EquipmentSlot slot, String name, String lore) {
