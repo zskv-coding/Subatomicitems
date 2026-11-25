@@ -1,6 +1,7 @@
 package net.zskv.subatomicitems.client.mixin;
 
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.state.ArmedEntityRenderState;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -14,11 +15,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EntityRendererMixin {
 
     @Inject(method = "getAndUpdateRenderState(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/client/render/entity/state/EntityRenderState;", at = @At("TAIL"))
-    private void hideShadow(Entity entity, float tickDelta, CallbackInfoReturnable<EntityRenderState> cir) {
-        if (entity instanceof LivingEntity living && InvisibleArmor.wearingAny(living)) {
-            EntityRenderState state = cir.getReturnValue();
-            state.shadowRadius = 0;
-            state.shadowPieces.clear();
+    private void hideStuff(Entity entity, float tickDelta, CallbackInfoReturnable<EntityRenderState> cir) {
+        if (!(entity instanceof LivingEntity living) || !InvisibleArmor.wearingAny(living)) return;
+
+        EntityRenderState state = cir.getReturnValue();
+        state.shadowRadius = 0;
+        state.shadowPieces.clear();
+
+        if (state instanceof ArmedEntityRenderState armed) {
+            armed.rightHandItemState.clear();
+            armed.leftHandItemState.clear();
         }
     }
 }
